@@ -2,7 +2,7 @@ import * as path from "path"
 import {timeMiddleware} from "./middleware/time";
 import express from "express";
 import httpErrors from "http-errors";
-import rootRoutes from "./routes/root";
+import rootRoutes from "../routes/root";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
