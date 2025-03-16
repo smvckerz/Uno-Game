@@ -2,13 +2,9 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express from "express";
 import httpErrors from "http-errors";
-<<<<<<< HEAD
 import morgan from "morgan";
 import * as path from "path";
-import rootRoutes from "./routes/root";
-=======
 import rootRoutes from "../routes/root";
->>>>>>> 605ac227ac442468e52bc7605cb937e98c20f7db
 
 dotenv.config();
 const app = express();
