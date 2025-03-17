@@ -5,12 +5,15 @@ import httpErrors from "http-errors";
 import morgan from "morgan";
 import * as path from "path";
 import rootRoutes from "../routes/root";
+import { timeMiddleware } from "./middleware/time";
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(morgan("dev"));
+
+app.use(timeMiddleware);
 
 app.use(express.json());
 
