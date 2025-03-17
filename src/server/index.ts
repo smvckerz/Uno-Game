@@ -29,6 +29,8 @@ app.set("view engine", "ejs");
 
 app.use("/", rootRoutes);
 
+app.use(express.static("src/public"));
+
 app.use((_request, _response, next) => {
   next(httpErrors(404));
 });
