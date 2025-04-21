@@ -1,13 +1,18 @@
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
+
 import express from "express";
 import httpErrors from "http-errors";
 import morgan from "morgan";
 import * as path from "path";
-import rootRoutes from "../routes/root";
 import { timeMiddleware } from "./middleware/time";
+import authRoutes from "../routes/authentication";
 
+
+import dotenv from "dotenv";
 dotenv.config();
+
+import rootRoutes from "../routes/root";
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -27,7 +32,11 @@ app.set("views", path.join(process.cwd(), "src", "server", "views"));
 
 app.set("view engine", "ejs");
 
+import engine from "ejs-mate";
+app.engine("ejs", engine);
+
 app.use("/", rootRoutes);
+app.use("/", authRoutes);
 
 app.use(express.static("src/public"));
 

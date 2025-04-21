@@ -1,9 +1,14 @@
 import express from "express";
-
 const router = express.Router();
 
-router.get("/", (_request, response) => {
-    response.render("root", { name: "Zeta Chi 1 site" });
+// Home page at "/"
+router.get("/", (_req, res) => {
+  res.render("pages/home", { title: "Home" });
+});
+
+// (Optional) duplicate route at "/home"
+router.get("/home", (_req, res) => {
+  res.render("pages/home", { title: "Home" });
 });
 
 export default router;
