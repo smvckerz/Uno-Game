@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNO Register</title>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="title-h1"></h1>
+        <div id="error-message" class="error"></div>
+        <div id="success-message" class="success"></div>
+        <form id="register-form">
+            <div>
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+            </div>
+            <div>
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            </div>
+            <div>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div>
+                <input type="password" id="password" name="password" placeholder="Password (min 5 chars)" minlength="5" required>
+            </div>
+            <div class="centered">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+
+        <div class="centered">
+            <p style="font-size: 12px">Already have an account? <a href="/index" style="text-decoration: none; color: #007bff; font-size: 12px">Login here</a></p>
+        </div>
+
+    </div>
+     <script>
+        const form = document.getElementById('register-form');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+        const titleh1 = document.getElementById('title-h1');
+        titleh1.innerText = document.title;
+
+        // Instead of submitting here:
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            errorMessage.textContent = '';
+            successMessage.textContent = '';
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Save to sessionStorage
+            sessionStorage.setItem('registrationData', JSON.stringify({
+                firstName, lastName, email, password
+            }));
+
+            // Go to avatar creation
+            window.location.href = '/html/avatarCreation.html';
+        });
+
+
+        // form.addEventListener('submit', async (event) => {
+        //     event.preventDefault();
+        //     errorMessage.textContent = '';
+        //     successMessage.textContent = '';
+        //
+        //     const firstName = document.getElementById('firstName').value;
+        //     const lastName = document.getElementById('lastName').value;
+        //     const email = document.getElementById('email').value;
+        //     const password = document.getElementById('password').value;
+        //
+        //     try {
+        //         const response = await fetch('/api/auth/register', {
+        //             method: 'POST',
+        //             headers: { 'Content-Type': 'application/json' },
+        //             body: JSON.stringify({ email, password, firstName, lastName })
+        //         });
+        //
+        //         const data = await response.json();
+        //
+        //         if (response.ok) {
+        //             const userId = data.user.id;
+        //             sessionStorage.setItem('registeredUserId', userId);
+        //             window.location.href = '/html/avatarCreation.html';
+        //         } else {
+        //             errorMessage.textContent = data.message || 'Registration failed.';
+        //              if (data.errors) { // Handles validation errors
+        //                  errorMessage.textContent = data.errors.map(e => e.msg).join(', ');
+        //             }
+        //         }
+        //     } catch (error) {
+        //         console.error('Registration Error:', error);
+        //         errorMessage.textContent = 'An error occurred during registration.';
+        //     }
+        // });
+    </script>
+</body>
+</html>
